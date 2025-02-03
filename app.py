@@ -1,23 +1,21 @@
-import os
 import requests
 from bs4 import BeautifulSoup
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)  # Permite que JavaScript en tu web acceda a la API
+CORS(app)
 
 def obtener_datos_dni(dni):
-    url = "https://eldni.com/pe/buscar-datos-por-dni"
+    url = "NUEVA_URL"  # Actualiza la URL si cambió
     
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
         "Referer": url,
-        "Origin": "https://eldni.com",
+        "Origin": "https://eldni.com",  # Actualiza el origen si es necesario
         "Content-Type": "application/x-www-form-urlencoded",
     }
     
-    # Intentamos obtener la página principal para capturar el token CSRF
     try:
         session = requests.Session()
         response = session.get(url, headers=headers)
@@ -33,13 +31,11 @@ def obtener_datos_dni(dni):
     except requests.exceptions.RequestException as e:
         return {"error": f"Error al obtener el token CSRF: {str(e)}"}
 
-    # Datos a enviar con el token dinámico
     data = {
         "_token": csrf_token,
         "dni": dni,
     }
 
-    # Enviar solicitud POST
     try:
         response = session.post(url, headers=headers, data=data)
         response.raise_for_status()
@@ -64,5 +60,4 @@ def obtener_dni():
     return jsonify(resultado)
 
 if __name__ == "__main__":
-    # Utiliza el puerto proporcionado por Render
-    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)), debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)
