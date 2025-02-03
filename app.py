@@ -7,7 +7,7 @@ app = Flask(__name__)
 CORS(app)
 
 def obtener_datos_dni(dni):
-    url = "NUEVA_URL"  # Actualiza la URL si cambió
+    url = "https://moonlit-tapioca-7e404a.netlify.app/aaaa.html"  # Actualiza la URL si cambió
     
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
