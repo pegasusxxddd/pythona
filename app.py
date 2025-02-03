@@ -1,3 +1,4 @@
+import os
 import requests
 from bs4 import BeautifulSoup
 from flask import Flask, request, jsonify
@@ -63,4 +64,5 @@ def obtener_dni():
     return jsonify(resultado)
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    # Utiliza el puerto proporcionado por Render
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)), debug=True)
